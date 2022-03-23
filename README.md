@@ -28,3 +28,12 @@ Transaction hash: 0x6951f95eabdb2eac42bb3c09f507fb3b15eb65895486511856ce578db84a
 ```
 
 
+# resources
+
+* [how cairo works](https://www.cairo-lang.org/docs/how_cairo_works/index.html#how-cairo-works)
+* [hello cairo](https://www.cairo-lang.org/docs/hello_cairo/index.html#hello-cairo)
+* [writing starknet contracts](https://www.cairo-lang.org/docs/hello_starknet/intro.html)
+* [cairo resource guide](https://www.cairo-lang.org/resource-guide/)
+* [stark 101](https://starkware.co/stark-101/)
+* [what is starknet](https://starknet.io/what-is-starknet/)
+* [building on starknet](https://starknet.io/building-on-starknet/)

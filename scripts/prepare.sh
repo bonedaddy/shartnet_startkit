@@ -2,6 +2,7 @@
 
 
 # starknet network supported: alpha-goerli
+# note: doesn't do a very good cleanup job
 
 # usage: prepare.sh <enable-vscode-ext>
 #
@@ -86,6 +87,12 @@ function install_vscode_ext() {
     wget https://github.com/starkware-libs/cairo-lang/releases/download/v0.8.0/cairo-0.8.0.vsix
     code --install-extension cairo-0.8.0.vsix
     rm cairo-0.8.0.vsix
+    echo "[INFO] shartnet_startkit installing cairo language server"
+    git clone https://github.com/bonedaddy/cairo-ls.git
+    cd cairo-ls
+    npm i
+    vsce package
+    code --install-extension caro-ls-0.0.19.vsix
     echo """[INFO] it is recommended to enable the following settings on vscode
 
 
@@ -93,7 +100,6 @@ function install_vscode_ext() {
 \"editor.formatOnSaveTimeout\": 1500
 """
 }
-
 
 
 function setup_env_vars() {
