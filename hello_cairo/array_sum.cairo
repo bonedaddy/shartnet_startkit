@@ -39,7 +39,7 @@ func array_sum_two(arr : felt*, size) -> (sum):
     return (sum=[arr] + sum_of_rest)
 end
 
-func array_sum_equal{range_check_ptr}(arr : felt*, size) -> (sum):
+func array_sum_equal{output_ptr: felt*, range_check_ptr}(arr : felt*, size) -> (sum):
     if size == 0:
         # could optionally write as return (0)
         # however it is recommended to write as follows
@@ -53,18 +53,20 @@ func array_sum_equal{range_check_ptr}(arr : felt*, size) -> (sum):
     # returns 0 if arr_div_two >  arr
     # which means arr is not a multiple of 2 
     let is_le_felt: felt = is_le(arr_div_two, [arr])
-
     if is_le_felt == 0:
+        # next value is odd
+        let (sum_of_rest) = array_sum_equal(arr=arr+1, size=size-1)
+        return (sum=sum_of_rest)
+    else:
+        # next value is even
         let (sum_of_rest) = array_sum_equal(arr=arr+1, size=size-1)
         return (sum=[arr] + sum_of_rest)
-    else:
-        let (sum_of_rest) = array_sum_equal(arr=arr+1, size=size-1)
-        return (sum=[arr])
     end
 end
 
+# builtins need to be included in the order they were declaredi in
 func main{output_ptr : felt*, range_check_ptr}():
-    const ARRAY_SIZE = 3
+    const ARRAY_SIZE = 5
 
     # Allocate an array.
     let (ptr) = alloc()
@@ -73,6 +75,8 @@ func main{output_ptr : felt*, range_check_ptr}():
     assert [ptr] = 2
     assert [ptr + 1] = 3
     assert [ptr + 2] = 4
+    assert [ptr + 3] = 5
+    assert [ptr + 4] = 6
 
 
     # Call array_sum to compute the sum of the elements.
