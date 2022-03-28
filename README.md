@@ -27,6 +27,14 @@ Public key: 0x066be9d2df098aee5b1d410148e3aeee6f0946d898a6aa68747d486f36479c7f
 Transaction hash: 0x6951f95eabdb2eac42bb3c09f507fb3b15eb65895486511856ce578db84a5bf
 ```
 
+# usage
+
+always make source to initialize the python venv before working:
+
+```shell
+$> python3.7 -m venv ~/cairo_venv
+```
+
 
 # resources
 
@@ -37,3 +45,7 @@ Transaction hash: 0x6951f95eabdb2eac42bb3c09f507fb3b15eb65895486511856ce578db84a
 * [stark 101](https://starkware.co/stark-101/)
 * [what is starknet](https://starknet.io/what-is-starknet/)
 * [building on starknet](https://starknet.io/building-on-starknet/)
+
+## suggested learning path
+
+If you want a more hands on approach start with [hello cairo](https://www.cairo-lang.org/docs/hello_cairo/index.html#hello-cairo), otherwise if you want a more technical / in-depth approach start with [how cairo works](https://www.cairo-lang.org/docs/how_cairo_works/index.html#how-cairo-works).

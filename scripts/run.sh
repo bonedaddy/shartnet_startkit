@@ -25,7 +25,7 @@ cairo-run \
     --relocate_prints \
     --layout=small
 
-if [[ "$COMPILE_CAIRO_FILE" == "tmp.json" ]]; then
+if [[ "$COMPILED_CAIRO_FILE" == "tmp.json" ]]; then
     echo "[WARN] cleaning up temporary files"
     rm "$COMPILED_CAIRO_FILE"
 fi
