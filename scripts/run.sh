@@ -12,9 +12,20 @@ if [[ "$COMPILED_CAIRO_FILE" == "" ]]; then
     exit 1
 fi
 
+if [[ "$(echo $COMPILED_CAIRO_FILE | awk -F '.' '{print $NF}')" != "json" ]]; then
+    echo "[WARN] detected uncompiled cairo file, compiling to temporary location"
+    ./scripts/compile.sh "$COMPILED_CAIRO_FILE" tmp.json
+    COMPILED_CAIRO_FILE="tmp.json"
+fi
+
 cairo-run \
     --program="$COMPILED_CAIRO_FILE" \
     --print_output \
     --print_info \
     --relocate_prints \
     --layout=small
+
+if [[ "$COMPILE_CAIRO_FILE" == "tmp.json" ]]; then
+    echo "[WARN] cleaning up temporary files"
+    rm "$COMPILED_CAIRO_FILE"
+fi
