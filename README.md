@@ -2,7 +2,7 @@
 
 ![](./assets/meme.png)
 
-A small starter kit for working with the Cairo programming language on *nix machine
+A small, dependency-less starter kit for working with the Cairo programming language on *nix machine 
 
 # installation
 
