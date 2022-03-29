@@ -1,5 +1,9 @@
 # shartnet_startkit
 
+![](./assets/meme.png)
+
+A small starter kit for working with the Cairo programming language on *nix machine
+
 # installation
 
 to prepare your environment for StarkNet development, Cairo and Python3.7 need to be installed. To do so a preparation script is provided, which is supported on Ubuntu systems, and likely with small modifications on mac osx systems.
@@ -33,6 +37,25 @@ always make source to initialize the python venv before working:
 
 ```shell
 $> python3.7 -m venv ~/cairo_venv
+```
+
+Afterwards you can point `scripts/run.sh` to an uncompile cairo file which will be compiled to a temporary location and ran, or you can point it to a compile cairo file which will be executed:
+
+```shell
+$> ./scripts/run.sh hello_cairo/array_sum.cairo
+[WARN] detected uncompiled cairo file, compiling to temporary location
+Program output:
+  48
+
+Number of steps: 179 (originally, 179)
+Used memory cells: 409
+Register values after execution:
+pc = 413
+ap = 389
+fp = 413
+
+[WARN] cleaning up temporary files
+
 ```
 
 
