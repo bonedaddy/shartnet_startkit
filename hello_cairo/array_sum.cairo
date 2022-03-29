@@ -1,8 +1,9 @@
 # https://www.cairo-lang.org/docs/hello_cairo/intro.html#using-array-sum
 
 
-%builtins output range_check
-
+%builtins output range_check bitwise
+from starkware.cairo.common.bitwise import bitwise_and
+from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.serialize import serialize_word
 from starkware.cairo.common.math_cmp import is_le
@@ -39,33 +40,41 @@ func array_sum_two(arr : felt*, size) -> (sum):
     return (sum=[arr] + sum_of_rest)
 end
 
-func array_sum_equal{output_ptr: felt*, range_check_ptr}(arr : felt*, size) -> (sum):
+
+# used to check if the value `a` is even, returning `1` if even
+# returning 0 if odd
+func is_even{bitwise_ptr: BitwiseBuiltin*}(a) -> (is_value_even):
+    let bitwised_felt: felt = bitwise_and(a, 1)
+    if bitwised_felt == 0:
+        return (is_value_even=1)
+    else:
+        return (is_value_even=0)
+    end
+end
+
+func array_product{output_ptr: felt*, range_check_ptr, bitwise_ptr: BitwiseBuiltin*}(arr : felt*, size) -> (sum):
     if size == 0:
         # could optionally write as return (0)
         # however it is recommended to write as follows
         # since it increases readibility. this can be done
         # with function parameters as well
-        return (sum=0)
+        return (sum=1)
     end
-
-    let arr_div_two = [arr] / 2
-
+    let value_of_arr = [arr]
     # returns 0 if arr_div_two >  arr
     # which means arr is not a multiple of 2 
-    let is_le_felt: felt = is_le(arr_div_two, [arr])
-    if is_le_felt == 0:
-        # next value is odd
-        let (sum_of_rest) = array_sum_equal(arr=arr+1, size=size-1)
-        return (sum=sum_of_rest)
+    let is_arr_even: felt = is_even(value_of_arr)
+    if is_arr_even == 1:
+        let (prod_of_rest) = array_product(arr=arr+1, size=size-1)
+        return (sum=value_of_arr * prod_of_rest)
     else:
-        # next value is even
-        let (sum_of_rest) = array_sum_equal(arr=arr+1, size=size-1)
-        return (sum=[arr] + sum_of_rest)
+        let (prod_of_rest) = array_product(arr=arr+1, size=size-1)
+        return (sum=prod_of_rest)
     end
 end
 
 # builtins need to be included in the order they were declaredi in
-func main{output_ptr : felt*, range_check_ptr}():
+func main{output_ptr : felt*, range_check_ptr, bitwise_ptr: BitwiseBuiltin*}():
     const ARRAY_SIZE = 5
 
     # Allocate an array.
@@ -80,7 +89,7 @@ func main{output_ptr : felt*, range_check_ptr}():
 
 
     # Call array_sum to compute the sum of the elements.
-    let (sum) = array_sum_equal(arr=ptr, size=ARRAY_SIZE)
+    let (sum) = array_product(arr=ptr, size=ARRAY_SIZE)
 
     # Write the sum to the program output.
     serialize_word(sum)

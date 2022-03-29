@@ -48,6 +48,16 @@ $> python3.7 -m venv ~/cairo_venv
 * [cairo memory model](https://www.cairo-lang.org/docs/how_cairo_works/cairo_intro.html#memory-model)
 * [cairo builtins](https://www.cairo-lang.org/docs/how_cairo_works/builtins.html#builtins)
 
+## misc
+
+* https://github.com/exothium/Cairo
+* https://github.com/bonedaddy/cairo-learning
+* https://github.com/abigger87/cairopal
+* https://github.com/abigger87/cairostarter
+* https://github.com/abigger87/cairo-by-example
+* https://github.com/sambarnes/fullstack-starknet
+* https://github.com/abigger87/cairomate
+
 ## suggested learning path
 
 If you want a more hands on approach start with [hello cairo](https://www.cairo-lang.org/docs/hello_cairo/index.html#hello-cairo), otherwise if you want a more technical / in-depth approach start with [how cairo works](https://www.cairo-lang.org/docs/how_cairo_works/index.html#how-cairo-works).
