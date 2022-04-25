@@ -68,6 +68,8 @@ func array_product{output_ptr: felt*, range_check_ptr, bitwise_ptr: BitwiseBuilt
         let (prod_of_rest) = array_product(arr=arr+1, size=size-1)
         return (sum=value_of_arr * prod_of_rest)
     else:
+        # this just returns the result of the call to `array_product`
+        # instead of multiplying the result by the value_of_arr
         let (prod_of_rest) = array_product(arr=arr+1, size=size-1)
         return (sum=prod_of_rest)
     end
